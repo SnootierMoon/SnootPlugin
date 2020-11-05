@@ -1,0 +1,24 @@
+name: SnootPlugin
+main: snoot.Main
+version: 6.9.420
+author: SnootierMoon
+description: Snoot's epic plugin
+
+commands:
+  chatcolor:
+    description: Set the color of your chat messages
+  nick:
+    description: Set a nickname
+  tags:
+    description: Create and use tags
+
+permissions:
+  snoot.chat.color:
+    default: true
+    description: allows you to modify your chat color
+  snoot.chat.nick:
+    default: true
+    description: allows you to modify your nickname
+  snoot.chat.tags:
+    default: true
+    description: allows you to create and use tags
