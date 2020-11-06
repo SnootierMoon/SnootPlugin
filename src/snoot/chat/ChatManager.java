@@ -14,72 +14,36 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import snoot.Main;
 import snoot.MessageFormat;
+import snoot.SnootFeatureManager;
 
-public final class ChatManager {
-
-    private final Main plugin;
-    private YamlConfiguration data;
+public final class ChatManager extends SnootFeatureManager {
 
     public final static List<String> chatColorList = Arrays.stream(ChatColor.values()).filter(ChatColor::isColor).map(MessageFormat::coloredColor).collect(Collectors.toList());
 
-    private final static String fileName = "chat_config.yml";
-
     public ChatManager() {
-        this.plugin = Main.getInstance();
-        readFile();
-        PluginCommand chatcolorCommand = plugin.getCommand("chatcolor");
-        PluginCommand nickCommand = plugin.getCommand("nick");
-        PluginCommand tagsCommand = plugin.getCommand("tags");
+        super("chat_config.yml");
+        PluginCommand chatcolorCommand = Main.getInstance().getCommand("chatcolor");
+        PluginCommand nickCommand = Main.getInstance().getCommand("nick");
+        PluginCommand tagsCommand = Main.getInstance().getCommand("tags");
         if (chatcolorCommand == null) {
-            plugin.getLogger().info("Internal error: Failed to find \"chatcolor\" command.");
+            Main.getInstance().getLogger().info("Internal error: Failed to find \"chatcolor\" command.");
         } else {
             chatcolorCommand.setExecutor(new ChatcolorCommandExecutor());
             chatcolorCommand.setTabCompleter(new ChatcolorTabCompleter());
         }
         if (nickCommand == null) {
-            plugin.getLogger().info("Internal error: Failed to find \"nick\" command.");
+            Main.getInstance().getLogger().info("Internal error: Failed to find \"nick\" command.");
         } else {
             nickCommand.setExecutor(new NickCommandExecutor( ));
             nickCommand.setTabCompleter(new NickTabCompleter());
         }
         if (tagsCommand == null) {
-            plugin.getLogger().info("Internal error: Failed to find \"tags\" command.");
+            Main.getInstance().getLogger().info("Internal error: Failed to find \"tags\" command.");
         } else {
             tagsCommand.setExecutor(new TagsCommandExecutor());
             tagsCommand.setTabCompleter(new TagsTabCompleter());
         }
-        plugin.getServer().getPluginManager().registerEvents(new ChatListener(), plugin);
-    }
-
-    public File findFile() {
-        File file = new File(plugin.getDataFolder(), fileName);
-        try {
-            if (!((!plugin.getDataFolder().exists() && !plugin.getDataFolder().mkdirs()) || (!file.exists() && !file.createNewFile()))) {
-                return file;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    void readFile() {
-        File file = findFile();
-        if (file != null) {
-            data = YamlConfiguration.loadConfiguration(file);
-        }
-    }
-
-    public void writeFile() {
-        File file = findFile();
-        if (file == null) {
-            return;
-        }
-        try {
-            data.save(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Main.getInstance().getServer().getPluginManager().registerEvents(new ChatListener(), Main.getInstance());
     }
 
     public boolean hasNick(final Player player) {

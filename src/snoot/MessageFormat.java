@@ -22,6 +22,7 @@ public class MessageFormat {
 
     public static String usage = MessageFormat.error("Usage:");
     public static String command(String name, String args) { return ChatColor.GRAY + "/" + ChatColor.BOLD + name + ChatColor.AQUA + " " + args + ChatColor.RESET; }
+    public static String commandHelp(String help) { return ChatColor.GREEN + help + ChatColor.RESET; }
 
     public static String coloredColor(ChatColor color) { return color + color.name().toLowerCase() + ChatColor.RESET; }
 

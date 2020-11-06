@@ -13,7 +13,9 @@ import javax.annotation.Nonnull;
 public final class NickCommandExecutor implements CommandExecutor {
 
     private final static String removeUsage = MessageFormat.command("nick", "remove");
+    private final static String removeHelp = MessageFormat.command("nick", "remove");
     private final static String setUsage = MessageFormat.command("nick", "set <nickname>");
+    private final static String setHelp = MessageFormat.commandHelp("set y");
 
     private final static String fullUsage = String.join("\n", removeUsage, setUsage);
 
@@ -24,7 +26,7 @@ public final class NickCommandExecutor implements CommandExecutor {
         } else if (args.length == 0) {
             sender.sendMessage(MessageFormat.usage);
             sender.sendMessage(fullUsage);
-        } else if (!sender.hasPermission("snoot.nick")) {
+        } else if (!sender.hasPermission("snoot.chat.nick")) {
             sender.sendMessage(MessageFormat.invalidPermissions);
         } else if (args[0].equals("remove")) {
             if (args.length != 1) {

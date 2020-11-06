@@ -8,9 +8,11 @@ commands:
   chatcolor:
     description: Set the color of your chat messages
   nick:
-    description: Set a nickname
+    description: Set your nickname
   tags:
-    description: Create and use tags
+    description: Create and equip tags
+  chairs:
+    description: Sit on chairs
 
 permissions:
   snoot.chat.color:
@@ -22,3 +24,6 @@ permissions:
   snoot.chat.tags:
     default: true
     description: allows you to create and use tags
+  snoot.chairs:
+    default: true
+    description: allows you to sit on chairs

@@ -16,15 +16,18 @@ public class ChatcolorCommandExecutor implements CommandExecutor {
     private final static String chatColorList = "Choose a chat color from the list:\n" + String.join(" ",  ChatManager.chatColorList);
 
     private final static String listUsage = MessageFormat.command("chatcolor", "list");
+    private final static String listHelp = MessageFormat.commandHelp("Lists all chat colors.");
     private final static String removeUsage = MessageFormat.command("chatcolor", "remove");
-    private final static String setUsage = MessageFormat.command("chatcolor", "set <nickname>");
+    private final static String removeHelp = MessageFormat.commandHelp("Removes your current chat color.");
+    private final static String setUsage = MessageFormat.command("chatcolor", "set <color>");
+    private final static String setHelp = MessageFormat.commandHelp("Sets your chat color to <color>.");
 
     private final static String fullUsage = String.join("\n", listUsage, removeUsage, setUsage);
 
     public boolean onCommand(@Nonnull CommandSender sender, final @Nonnull Command command, @Nonnull final String label, @Nonnull final String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(MessageFormat.playerExclusive);
-        } else if (!sender.hasPermission("snoot.chatcolor")) {
+        } else if (!sender.hasPermission("snoot.chat.color")) {
             sender.sendMessage(MessageFormat.invalidPermissions);
         } else if (args.length == 0) {
             sender.sendMessage(MessageFormat.usage);
