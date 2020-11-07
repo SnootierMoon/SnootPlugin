@@ -5,25 +5,28 @@ author: SnootierMoon
 description: Snoot's epic plugin
 
 commands:
+  chairs:
+    description: Sit on chairs
   chatcolor:
     description: Set the color of your chat messages
   nick:
     description: Set your nickname
   tags:
     description: Create and equip tags
-  chairs:
-    description: Sit on chairs
 
 permissions:
+  snoot.chairs:
+    default: true
+    description: allows you to sit on chairs
   snoot.chat.color:
     default: true
     description: allows you to modify your chat color
   snoot.chat.nick:
     default: true
     description: allows you to modify your nickname
-  snoot.chat.tags:
+  snoot.chat.tags.modify:
     default: true
     description: allows you to create and use tags
-  snoot.chairs:
+  snoot.chat.tags.use:
     default: true
-    description: allows you to sit on chairs
+    description: allows you to create and use tags

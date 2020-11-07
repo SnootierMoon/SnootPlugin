@@ -1,6 +1,7 @@
-package snoot;
+package snoot.parents;
 
 import org.bukkit.configuration.file.YamlConfiguration;
+import snoot.Main;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +10,7 @@ public class SnootFeatureManager {
 
     protected YamlConfiguration data;
     protected final String fileName;
-    private boolean file_loaded = false;
+    private boolean fileLoaded = false;
 
     protected SnootFeatureManager() {
         fileName = "";
@@ -33,14 +34,14 @@ public class SnootFeatureManager {
 
     protected void readFile() {
         File file = findFile();
-        file_loaded = true;
+        fileLoaded = true;
         if (file != null) {
             data = YamlConfiguration.loadConfiguration(file);
         }
     }
 
-    protected void writeFile() {
-        if (!file_loaded) {
+    public void writeFile() {
+        if (!fileLoaded) {
             return;
         }
         File file = findFile();
@@ -53,7 +54,5 @@ public class SnootFeatureManager {
             e.printStackTrace();
         }
     }
-
-
 
 }

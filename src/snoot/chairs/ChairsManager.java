@@ -3,9 +3,7 @@ package snoot.chairs;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import snoot.Main;
-import snoot.SnootFeatureManager;
-import snoot.chat.ChatcolorCommandExecutor;
-import snoot.chat.ChatcolorTabCompleter;
+import snoot.parents.SnootFeatureManager;
 
 public class ChairsManager extends SnootFeatureManager {
 

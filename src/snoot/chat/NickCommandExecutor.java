@@ -1,56 +1,48 @@
 package snoot.chat;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.CommandExecutor;
+import org.bukkit.entity.Player;
 import snoot.Main;
-import snoot.MessageFormat;
+import snoot.parents.SnootCommandExecutor;
+import snoot.util.MessageFormat;
 
-import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Map;
 
-public final class NickCommandExecutor implements CommandExecutor {
+public class NickCommandExecutor extends SnootCommandExecutor {
 
-    private final static String removeUsage = MessageFormat.command("nick", "remove");
-    private final static String removeHelp = MessageFormat.command("nick", "remove");
-    private final static String setUsage = MessageFormat.command("nick", "set <nickname>");
-    private final static String setHelp = MessageFormat.commandHelp("set y");
+    NickCommandExecutor() {
+        super("family of commands to change your nickname");
+        addSubCommand(new SubCommand(
+                "remove",
+                "",
+                "remove your current nickname",
+                "snoot.chat.nick",
+                Map.of(0, NickCommandExecutor::commandRemove),
+                true));
+        addSubCommand(new SubCommand(
+                "set",
+                "",
+                "change your current nickname",
+                "snoot.chat.nick",
+                Map.of(1, NickCommandExecutor::commandSet),
+                true));
+        initialize();
+    }
 
-    private final static String fullUsage = String.join("\n", removeUsage, setUsage);
-
-    public boolean onCommand(@Nonnull CommandSender sender, @Nonnull final Command command, @Nonnull final String label, @Nonnull final String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(MessageFormat.playerExclusive);
-            return true;
-        } else if (args.length == 0) {
-            sender.sendMessage(MessageFormat.usage);
-            sender.sendMessage(fullUsage);
-        } else if (!sender.hasPermission("snoot.chat.nick")) {
-            sender.sendMessage(MessageFormat.invalidPermissions);
-        } else if (args[0].equals("remove")) {
-            if (args.length != 1) {
-                sender.sendMessage(MessageFormat.usage);
-                sender.sendMessage(removeUsage);
-            } else if (!Main.getChatManager().hasNick((Player)sender)) {
-                sender.sendMessage(MessageFormat.error("You do not have a nick."));
-            } else {
-                Main.getChatManager().setNick((Player)sender, null);
-                sender.sendMessage(MessageFormat.success("Your nick has been removed."));
-            }
-        } else if (args[0].equals("set")) {
-            if (args.length != 2) {
-                sender.sendMessage(MessageFormat.usage);
-                sender.sendMessage(setUsage);
-            } else {
-                Main.getChatManager().setNick((Player)sender, ChatColor.translateAlternateColorCodes('&', args[1]) + ChatColor.RESET);
-                sender.sendMessage(MessageFormat.success("Your nick has been set to " + ((Player)sender).getDisplayName() + "."));
-            }
+    private static void commandRemove(CommandSender sender, List<String> args) {
+        if (!Main.getChatManager().hasNick((Player)sender)) {
+            sender.sendMessage(MessageFormat.error("You do not have a nickname."));
         } else {
-            sender.sendMessage(MessageFormat.usage);
-            sender.sendMessage(fullUsage);
+            Main.getChatManager().setNick((Player) sender, null);
+            sender.sendMessage(MessageFormat.success("Your nickname has been removed."));
         }
-        return true;
+    }
+
+    private static void commandSet(CommandSender sender, List<String> args) {
+        Main.getChatManager().setNick((Player)sender, ChatColor.translateAlternateColorCodes('&', args.get(0)) + ChatColor.RESET);
+        sender.sendMessage(MessageFormat.success("Your nickname has been set to " + ((Player)sender).getDisplayName() + "."));
     }
 
 }

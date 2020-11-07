@@ -1,38 +1,28 @@
 package snoot.chairs;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
-import snoot.Helper;
+import snoot.parents.SnootTabCompleter;
 
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-public class ChairsTabCompleter implements TabCompleter {
+public class ChairsTabCompleter extends SnootTabCompleter {
 
     @Override
-    public List<String> onTabComplete(@Nonnull CommandSender sender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
-        return Helper.filterPrefix(onTabComplete(args), args[args.length - 1]);
-    }
-
-    private List<String> onTabComplete(String[] args) {
+    protected List<String> onTabComplete(String[] args) {
         if (args.length == 0) {
-            return new ArrayList<>();
+            return null;
         } else if (args.length == 1) {
-            return Arrays.asList("?", "off", "on");
+            return Arrays.asList("off", "on");
         } else if (args[0].equals("off")) {
             if (args.length == 2) {
-                return Collections.singletonList("?");
+                return null;
             }
         } else if (args[0].equals("on")) {
             if (args.length == 2) {
-                return Collections.singletonList("?");
+                return null;
             }
         }
-        return new ArrayList<>();
+        return null;
     }
 
 }

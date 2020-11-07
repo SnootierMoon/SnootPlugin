@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import org.bukkit.event.Listener;
 import snoot.Main;
-import snoot.MessageFormat;
+import snoot.util.MessageFormat;
 
 public class ChatListener implements Listener {
 
@@ -32,4 +32,5 @@ public class ChatListener implements Listener {
         final Player player = event.getPlayer();
         event.setQuitMessage(player.getDisplayName() + MessageFormat.info(" left the server."));
     }
+
 }

@@ -1,7 +1,5 @@
 package snoot.chat;
 
-import java.io.IOException;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,13 +8,12 @@ import java.util.stream.Collectors;
 import org.bukkit.ChatColor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import snoot.Main;
-import snoot.MessageFormat;
-import snoot.SnootFeatureManager;
+import snoot.util.MessageFormat;
+import snoot.parents.SnootFeatureManager;
 
-public final class ChatManager extends SnootFeatureManager {
+public class ChatManager extends SnootFeatureManager {
 
     public final static List<String> chatColorList = Arrays.stream(ChatColor.values()).filter(ChatColor::isColor).map(MessageFormat::coloredColor).collect(Collectors.toList());
 
@@ -34,7 +31,7 @@ public final class ChatManager extends SnootFeatureManager {
         if (nickCommand == null) {
             Main.getInstance().getLogger().info("Internal error: Failed to find \"nick\" command.");
         } else {
-            nickCommand.setExecutor(new NickCommandExecutor( ));
+            nickCommand.setExecutor(new NickCommandExecutor());
             nickCommand.setTabCompleter(new NickTabCompleter());
         }
         if (tagsCommand == null) {
