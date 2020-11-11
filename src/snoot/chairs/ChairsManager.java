@@ -1,6 +1,5 @@
 package snoot.chairs;
 
-import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import snoot.Main;
 import snoot.parents.SnootFeatureManager;
@@ -9,14 +8,8 @@ public class ChairsManager extends SnootFeatureManager {
 
     public ChairsManager() {
         super("chairs_config.yml");
-        PluginCommand chairsCommand = Main.getInstance().getCommand("chairs");
-        if (chairsCommand == null) {
-            Main.getInstance().getLogger().info("Internal error: Failed to find \"chatcolor\" command.");
-        } else {
-            chairsCommand.setExecutor(new ChairsCommandExecutor());
-            chairsCommand.setTabCompleter(new ChairsTabCompleter());
-        }
-        Main.getInstance().getServer().getPluginManager().registerEvents(new ChairsListener(), Main.getInstance());
+        Main.addCommand("chairs", new ChairsCommandExecutor(), new ChairsTabCompleter());
+        Main.addListener(new ChairsListener());
     }
 
     public void enableChairs(Player player) {

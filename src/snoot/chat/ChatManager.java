@@ -6,41 +6,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.bukkit.ChatColor;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import snoot.Main;
-import snoot.util.MessageFormat;
 import snoot.parents.SnootFeatureManager;
 
 public class ChatManager extends SnootFeatureManager {
 
-    public final static List<String> chatColorList = Arrays.stream(ChatColor.values()).filter(ChatColor::isColor).map(MessageFormat::coloredColor).collect(Collectors.toList());
+    public final static List<ChatColor> colorList = Arrays.stream(ChatColor.values()).filter(ChatColor::isColor).collect(Collectors.toList());
+    public final static List<String> chatColorList = colorList.stream().map(s -> s + s.name().toLowerCase()).collect(Collectors.toList());
+    public final static List<String> colorCodeList = colorList.stream().map(s -> s + "&" + s.getChar()).collect(Collectors.toList());
 
     public ChatManager() {
         super("chat_config.yml");
-        PluginCommand chatcolorCommand = Main.getInstance().getCommand("chatcolor");
-        PluginCommand nickCommand = Main.getInstance().getCommand("nick");
-        PluginCommand tagsCommand = Main.getInstance().getCommand("tags");
-        if (chatcolorCommand == null) {
-            Main.getInstance().getLogger().info("Internal error: Failed to find \"chatcolor\" command.");
-        } else {
-            chatcolorCommand.setExecutor(new ChatcolorCommandExecutor());
-            chatcolorCommand.setTabCompleter(new ChatcolorTabCompleter());
-        }
-        if (nickCommand == null) {
-            Main.getInstance().getLogger().info("Internal error: Failed to find \"nick\" command.");
-        } else {
-            nickCommand.setExecutor(new NickCommandExecutor());
-            nickCommand.setTabCompleter(new NickTabCompleter());
-        }
-        if (tagsCommand == null) {
-            Main.getInstance().getLogger().info("Internal error: Failed to find \"tags\" command.");
-        } else {
-            tagsCommand.setExecutor(new TagsCommandExecutor());
-            tagsCommand.setTabCompleter(new TagsTabCompleter());
-        }
-        Main.getInstance().getServer().getPluginManager().registerEvents(new ChatListener(), Main.getInstance());
+        Main.addCommand("chatcolor", new ChatcolorCommandExecutor(), new ChatcolorTabCompleter());
+        Main.addCommand("colors", new ColorsCommandExecutor(), new ColorsTabCompleter());
+        Main.addCommand("nick", new NickCommandExecutor(), new NickTabCompleter());
+        Main.addCommand("tags", new TagsCommandExecutor(), new TagsTabCompleter());
+        Main.addListener(new ChatListener());
     }
 
     public boolean hasNick(final Player player) {
@@ -50,7 +33,7 @@ public class ChatManager extends SnootFeatureManager {
     public String getNick(final Player player) {
         String nick = data.getString(player.getUniqueId().toString() + ".nick");
         if (nick == null) {
-            return MessageFormat.info(player.getName());
+            return ChatColor.GRAY + player.getName() + ChatColor.RESET;
         }
         return nick;
     }

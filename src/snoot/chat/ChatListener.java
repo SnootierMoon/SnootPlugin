@@ -1,36 +1,62 @@
 package snoot.chat;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.EventHandler;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import org.bukkit.event.Listener;
 import snoot.Main;
-import snoot.util.MessageFormat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChatListener implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onPlayerJoin(final PlayerJoinEvent event) {
-        final Player player = event.getPlayer();
-        Main.getChatManager().updateNick(player);
-        event.setJoinMessage(player.getDisplayName() + MessageFormat.info(" joined the server."));
+        Main.getChatManager().updateNick(event.getPlayer());
+        String nick = Main.getChatManager().getNick(event.getPlayer());
+        BaseComponent baseComponent = new TextComponent(nick + ChatColor.GRAY + " joined the server.");
+        baseComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(nick + ChatColor.DARK_GRAY + " AKA " + ChatColor.GRAY + event.getPlayer().getName())));
+        Bukkit.spigot().broadcast(baseComponent);
+        event.setJoinMessage(null);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onChatPlayer(AsyncPlayerChatEvent event) {
+    @EventHandler
+    public void onChatPlayer(final AsyncPlayerChatEvent event) {
         String tag = Main.getChatManager().getPlayerTagName(event.getPlayer());
-        tag = ((tag == null) ? (ChatColor.DARK_GRAY + ":") : (" " + ChatColor.DARK_GRAY + "[" + tag + ChatColor.DARK_GRAY + "]:")) + ChatColor.RESET;
-        event.setFormat("%1$s" + tag + Main.getChatManager().getColor(event.getPlayer()) + " %2$s");
+        String nick = Main.getChatManager().getNick(event.getPlayer());
+        List<BaseComponent> baseComponents = new ArrayList<>();
+        BaseComponent baseComponent = new TextComponent(nick);
+        baseComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(nick + ChatColor.DARK_GRAY + " AKA " + ChatColor.GRAY + event.getPlayer().getName())));
+        baseComponents.add(baseComponent);
+        if (tag != null) {
+            baseComponents.add(new TextComponent(ChatColor.DARK_GRAY + " [" + tag + ChatColor.DARK_GRAY + "]"));
+        }
+        baseComponents.add(new TextComponent(ChatColor.GRAY + ": "));
+        if (event.getMessage().startsWith("./")) {
+            event.setMessage(event.getMessage().substring(1));
+        }
+        baseComponent = new TextComponent(event.getMessage());
+        baseComponent.setColor(Main.getChatManager().getColor(event.getPlayer()).asBungee());
+        baseComponents.add(baseComponent);
+        Bukkit.spigot().broadcast(baseComponents.toArray(new BaseComponent[0]));
+        event.setCancelled(true);
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onPlayerQuit(final PlayerQuitEvent event) {
-        final Player player = event.getPlayer();
-        event.setQuitMessage(player.getDisplayName() + MessageFormat.info(" left the server."));
+        String nick = Main.getChatManager().getNick(event.getPlayer());
+        BaseComponent baseComponent = new TextComponent(nick + ChatColor.GRAY + " left the server.");
+        baseComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(nick + ChatColor.DARK_GRAY + " AKA " + ChatColor.GRAY + event.getPlayer().getName())));
+        Bukkit.spigot().broadcast(baseComponent);
+        event.setQuitMessage(null);
     }
 
 }

@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public abstract class SnootTabCompleter implements TabCompleter {
 
@@ -16,7 +17,7 @@ public abstract class SnootTabCompleter implements TabCompleter {
         if (suggestions == null) {
             return new ArrayList<>();
         }
-        return suggestions.stream().filter(s -> s.startsWith(args[args.length - 1])).collect(Collectors.toList());
+        return Stream.concat(Stream.of("?"), suggestions.stream()).filter(s -> s.startsWith(args[args.length - 1])).collect(Collectors.toList());
     }
 
     protected abstract List<String> onTabComplete(String[] args);

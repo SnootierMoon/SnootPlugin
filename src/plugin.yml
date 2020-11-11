@@ -8,22 +8,46 @@ commands:
   chairs:
     description: Sit on chairs
   chatcolor:
-    description: Set the color of your chat messages
+    description: Change the color of your chat messages
+    aliases: chatcolour
+  colors:
+    description: List all chat colors
+    aliases: colours
   nick:
-    description: Set your nickname
+    description: Change your nickname
+  survival:
+    description: Join and leave the survival world
   tags:
     description: Create and equip tags
 
 permissions:
+  snoot.*:
+    default: true
+    children:
+      snoot.chairs: true
+      snoot.chat.*: true
+
   snoot.chairs:
     default: true
     description: allows you to sit on chairs
+
+  snoot.chat.*:
+    default: true
+    children:
+      snoot.chat.color: true
+      snoot.chat.nick: true
+      snoot.chat.tags.*: true
   snoot.chat.color:
     default: true
     description: allows you to modify your chat color
   snoot.chat.nick:
     default: true
     description: allows you to modify your nickname
+  snoot.chat.tags.*:
+    default: true
+    children:
+      snoot.chat.tags.modify: true
+      snoot.chat.tags.use: true
   snoot.chat.tags.modify:
     default: true
     description: allows you to create and use tags
