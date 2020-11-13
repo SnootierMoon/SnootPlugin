@@ -1,6 +1,6 @@
-package snoot.chat;
+package snoot.commands.chat;
 
-import snoot.parents.SnootTabCompleter;
+import snoot.commands.parents.SnootTabCompleter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

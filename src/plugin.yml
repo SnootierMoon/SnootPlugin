@@ -6,51 +6,83 @@ description: Snoot's epic plugin
 
 commands:
   chairs:
-    description: Sit on chairs
+    description: /chairs ? for more info
+    permission: snoot.chairs
   chatcolor:
-    description: Change the color of your chat messages
     aliases: chatcolour
+    description: /chatcolor ? for more info
+    permission: snoot.chat.color
   colors:
-    description: List all chat colors
     aliases: colours
+    description: /colors ? for more info
+    permission: snoot.colors
+  near:
+    description: /near ? for more info
+    permission: snoot.near
   nick:
-    description: Change your nickname
+    description: /nick ? for more info
+    permission: snoot.chat.nick
+  rename:
+    description: /rename ? for more info
+    permission: snoot.rename
   survival:
-    description: Join and leave the survival world
+    description: /survival ? for more info
+    permission: snoot.survival
   tags:
-    description: Create and equip tags
+    description: /tags ? for more info
+    permission: snoot.chat.tags
 
 permissions:
-  snoot.*:
+  snoot:
     default: true
     children:
       snoot.chairs: true
-      snoot.chat.*: true
+      snoot.colors: true
+      snoot.chat: true
+      snoot.near: true
+      snoot.rename: true
+      snoot.survival: true
 
   snoot.chairs:
     default: true
-    description: allows you to sit on chairs
+    description: allows you to use /chairs
 
-  snoot.chat.*:
+  snoot.colors:
+    default: true
+    description: allows you to use /colors
+
+  snoot.chat:
     default: true
     children:
       snoot.chat.color: true
       snoot.chat.nick: true
-      snoot.chat.tags.*: true
+      snoot.chat.tags: true
   snoot.chat.color:
     default: true
-    description: allows you to modify your chat color
+    description: allows you to use /chatcolor
   snoot.chat.nick:
     default: true
-    description: allows you to modify your nickname
-  snoot.chat.tags.*:
+    description: allows you to use /nick
+  snoot.chat.tags:
     default: true
     children:
       snoot.chat.tags.modify: true
       snoot.chat.tags.use: true
   snoot.chat.tags.modify:
     default: true
-    description: allows you to create and use tags
+    description: allows you to change tags with /tags
   snoot.chat.tags.use:
     default: true
-    description: allows you to create and use tags
+    description: allows you to equip tags with /tags
+
+  snoot.near:
+    default: true
+    description: allows you to use /near
+
+  snoot.rename:
+    default: true
+    description: allows you to use /rename
+
+  snoot.survival:
+    default: true
+    description: allows you to use /survival

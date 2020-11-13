@@ -1,4 +1,4 @@
-package snoot.parents;
+package snoot.commands.parents;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import snoot.Main;

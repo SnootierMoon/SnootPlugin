@@ -1,8 +1,8 @@
-package snoot.chairs;
+package snoot.commands.chairs;
 
 import org.bukkit.entity.Player;
 import snoot.Main;
-import snoot.parents.SnootFeatureManager;
+import snoot.commands.parents.SnootFeatureManager;
 
 public class ChairsManager extends SnootFeatureManager {
 

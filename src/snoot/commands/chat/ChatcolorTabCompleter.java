@@ -1,7 +1,7 @@
-package snoot.chat;
+package snoot.commands.chat;
 
-import org.bukkit.ChatColor;
-import snoot.parents.SnootTabCompleter;
+import snoot.Colors;
+import snoot.commands.parents.SnootTabCompleter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class ChatcolorTabCompleter extends SnootTabCompleter {
 
-    private final static List<String> chatColorListRaw = ChatManager.chatColorList.stream().map(ChatColor::stripColor).collect(Collectors.toList());
+    private static final List<String> chatColorListRaw = Colors.colorList.stream().map(color -> color.name().toLowerCase()).collect(Collectors.toList());
 
     ChatcolorTabCompleter() {
         chatColorListRaw.add(0, "?");

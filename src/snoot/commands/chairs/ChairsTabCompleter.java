@@ -1,6 +1,6 @@
-package snoot.chairs;
+package snoot.commands.chairs;
 
-import snoot.parents.SnootTabCompleter;
+import snoot.commands.parents.SnootTabCompleter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

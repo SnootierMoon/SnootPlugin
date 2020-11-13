@@ -1,4 +1,4 @@
-package snoot.parents;
+package snoot.commands.parents;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -17,7 +17,7 @@ public abstract class SnootTabCompleter implements TabCompleter {
         if (suggestions == null) {
             return new ArrayList<>();
         }
-        return Stream.concat(Stream.of("?"), suggestions.stream()).filter(s -> s.startsWith(args[args.length - 1])).collect(Collectors.toList());
+        return Stream.concat(Stream.of("?"), suggestions.stream()).filter(suggestion -> suggestion.startsWith(args[args.length - 1])).collect(Collectors.toList());
     }
 
     protected abstract List<String> onTabComplete(String[] args);

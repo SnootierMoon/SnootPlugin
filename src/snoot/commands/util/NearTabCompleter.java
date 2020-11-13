@@ -1,11 +1,11 @@
-package snoot.chat;
+package snoot.commands.util;
 
-import snoot.parents.SnootTabCompleter;
+import snoot.commands.parents.SnootTabCompleter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColorsTabCompleter extends SnootTabCompleter {
+public class NearTabCompleter extends SnootTabCompleter {
 
     @Override
     protected List<String> onTabComplete(String[] args) {

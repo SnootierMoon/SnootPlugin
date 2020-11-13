@@ -1,6 +1,6 @@
-package snoot.survival;
+package snoot.commands.survival;
 
-import snoot.parents.SnootTabCompleter;
+import snoot.commands.parents.SnootTabCompleter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

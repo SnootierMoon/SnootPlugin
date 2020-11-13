@@ -3,11 +3,12 @@ package snoot;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import snoot.chairs.ChairsManager;
-import snoot.chat.ChatManager;
-import snoot.parents.SnootCommandExecutor;
-import snoot.parents.SnootTabCompleter;
-import snoot.survival.SurvivalManager;
+import snoot.commands.chairs.ChairsManager;
+import snoot.commands.chat.ChatManager;
+import snoot.commands.parents.SnootCommandExecutor;
+import snoot.commands.parents.SnootTabCompleter;
+import snoot.commands.survival.SurvivalManager;
+import snoot.commands.util.UtilManager;
 
 public final class Main extends JavaPlugin {
 
@@ -15,6 +16,7 @@ public final class Main extends JavaPlugin {
     private ChatManager chatManager;
     private ChairsManager chairsManager;
     private SurvivalManager survivalManager;
+    private UtilManager utilManager;
 
     @Override
     public void onEnable()  {
@@ -22,6 +24,7 @@ public final class Main extends JavaPlugin {
         chatManager = new ChatManager();
         chairsManager = new ChairsManager();
         survivalManager = new SurvivalManager();
+        utilManager = new UtilManager();
     }
 
     @Override
@@ -53,4 +56,5 @@ public final class Main extends JavaPlugin {
     }
     public static ChairsManager getChairsManager() { return instance.chairsManager; }
     public static SurvivalManager survivalManager() { return instance.survivalManager; }
+
 }

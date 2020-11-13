@@ -1,4 +1,4 @@
-package snoot.chairs;
+package snoot.commands.chairs;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,7 +19,7 @@ import snoot.Main;
 public class ChairsListener implements Listener {
     
     @EventHandler
-    public void onPlayerInteract(final PlayerInteractEvent event) {
+    public void onPlayerInteract(PlayerInteractEvent event) {
         if (!event.hasBlock() || event.getAction() != Action.RIGHT_CLICK_BLOCK) {
             return;
         }
@@ -27,9 +27,12 @@ public class ChairsListener implements Listener {
         if (block == null ||
                 !(block.getBlockData() instanceof Stairs) ||
                 block.getRelative(BlockFace.UP).getType() != Material.AIR ||
-                !event.getPlayer().hasPermission("snoot.chairs") ||
+                !event.getPlayer().hasPermission("snoot.commands.chairs") ||
+                event.getPlayer().getInventory().getItemInMainHand().getType() != Material.AIR ||
+                event.getPlayer().getInventory().getItemInOffHand().getType() != Material.AIR ||
                 !Main.getChairsManager().chairsEnabled(event.getPlayer()) ||
-                event.getPlayer().isSneaking()) {
+                event.getPlayer().isSneaking() ||
+                ((Stairs)block.getBlockData()).getHalf().ordinal() == 0) {
             return;
         }
         if (event.getPlayer().isGliding()) {
@@ -61,7 +64,7 @@ public class ChairsListener implements Listener {
     @EventHandler
     public void onDismount(EntityDismountEvent event) {
         if (event.getEntity() instanceof Player) {
-            new BukkitRunnable(){
+            new BukkitRunnable() {
                 @Override
                 public void run() {
                     getUp((Player)event.getEntity(), event.getDismounted());
