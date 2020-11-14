@@ -12,7 +12,7 @@ This plugin was designed for servers with survival worlds (such as the overworld
 
  - Slap the jar into your =/plugins/= and you're set.
  - Deny permissions to players for:
-   - snoot.survival (allows them to join/leave survival worlds)
+   - =snoot.survival= (allows them to join/leave survival worlds)
 
 *** For survival/creative: 
 
