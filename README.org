@@ -1,8 +1,6 @@
 #+AUTHOR: SnootierMoon
 #+OPTIONS: author:nil date:nil num:nil toc:nil
-#+TITLE: SnootPlugin README
-
-* SnootPlugin
+#+TITLE: SnootPlugin
 
 This is my first project with Bukkit. This is also my first project with Java.
 
