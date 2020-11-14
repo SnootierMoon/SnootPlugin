@@ -55,6 +55,6 @@ public final class Main extends JavaPlugin {
         return instance.chatManager;
     }
     public static ChairsManager getChairsManager() { return instance.chairsManager; }
-    public static SurvivalManager survivalManager() { return instance.survivalManager; }
+    public static SurvivalManager getSurvivalManager() { return instance.survivalManager; }
 
 }

@@ -4,40 +4,55 @@ import org.bukkit.World;
 import snoot.Main;
 import snoot.commands.parents.SnootFeatureManager;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SurvivalManager extends SnootFeatureManager {
 
+    public enum WorldType {
+        CREATIVE,
+        NONE,
+        SURVIVAL
+    }
+
     public SurvivalManager() {
         super("survival_config.yml");
         Main.addCommand("survival", new SurvivalCommandExecutor(), new SurvivalTabCompleter());
+        Main.getInstance().getServer().getWorlds().get(0).getUID();
     }
 
-    public List<String> getCreativeWorldNames() {
-        List<String> worldNames = data.getStringList("creative");
-        if (worldNames.isEmpty()) {
-            return Arrays.asList("world", "world_nether", "world_the_end", "flatworld");
+    public WorldType setWorldType(World world, String type) {
+        WorldType worldType;
+        if (type == null) {
+            data.set(world.getUID().toString(), null);
+            return null;
         }
-        return worldNames;
-    }
-
-    public List<String> getSurvivalWorldNames() {
-        List<String> worldNames = data.getStringList("survival");
-        if (worldNames.isEmpty()) {
-            return Arrays.asList("survival", "survival_nether", "survival_end");
+        try {
+            worldType = WorldType.valueOf(type.toUpperCase());
+        } catch (java.lang.IllegalArgumentException e) {
+            return null;
         }
-        return worldNames;
+        data.set(world.getUID().toString(), worldType.name());
+        return worldType;
     }
 
-    public List<World> getCreativeWorlds() {
-        return getCreativeWorldNames().stream().map(worldName ->  Main.getInstance().getServer().getWorld(worldName)).filter(Objects::nonNull).collect(Collectors.toList());
+    public WorldType getWorldType(World world) {
+        WorldType worldType;
+        try {
+            String string = data.getString(world.getUID().toString());
+            if (string == null) {
+                return WorldType.NONE;
+            }
+            worldType = WorldType.valueOf(string);
+        } catch (java.lang.IllegalArgumentException e) {
+            return WorldType.NONE;
+        }
+        Main.getInstance().getLogger().info(world.getName() + " = " + worldType.name());
+        return worldType;
     }
 
-    public List<World> getSurvivalWorlds() {
-        return getSurvivalWorldNames().stream().map(worldName ->  Main.getInstance().getServer().getWorld(worldName)).filter(Objects::nonNull).collect(Collectors.toList());
+    public List<World> getWorlds(WorldType worldType) {
+        return Main.getInstance().getServer().getWorlds().stream().filter(world -> getWorldType(world) == worldType).collect(Collectors.toList());
     }
 
 }

@@ -49,7 +49,7 @@ public class ChatcolorCommandExecutor extends SnootCommandExecutor {
                 true));
         addSubCommand(new SubCommand(
                 "set",
-                Collections.singletonList(new HelpArg("color", "your new chat color", "see /colors")),
+                Collections.singletonList(new HelpArg("color", "your new chat color", "see /colors list")),
                 "change your current chat color",
                 null,
                 Collections.singletonMap(1, ChatcolorCommandExecutor::commandSet),

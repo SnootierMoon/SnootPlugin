@@ -30,7 +30,7 @@ public class ChatListener implements Listener {
     }
 
     @EventHandler
-    public void onChatPlayer(AsyncPlayerChatEvent event) {
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
         BaseComponent[] baseComponents = new ComponentBuilder()
                 .append(Main.getChatManager().getNickComponent(event.getPlayer()))
                 .append("")

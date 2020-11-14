@@ -13,7 +13,7 @@ import java.util.List;
 public class ChairsCommandExecutor extends SnootCommandExecutor {
 
     public ChairsCommandExecutor() {
-        super("group of commands for sitting on stairs", "snoot.commands.chairs", true);
+        super("group of commands for sitting on stairs", "snoot.chairs", true);
         addSubCommand(new SubCommand(
                 "off",
                 new ArrayList<>(),

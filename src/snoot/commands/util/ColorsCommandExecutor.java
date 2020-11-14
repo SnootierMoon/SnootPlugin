@@ -1,5 +1,10 @@
 package snoot.commands.util;
 
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import snoot.Colors;
@@ -19,15 +24,44 @@ public class ColorsCommandExecutor extends SnootCommandExecutor {
     ).collect(Collectors.joining("\n"));
 
     ColorsCommandExecutor() {
-        super(new ArrayList<>(), "list all color codes", "snoot.colors", Collections.singletonMap(0, ColorsCommandExecutor::commandColors), false);
+        super("group of commands for listing and testing the color codes", "snoot.colors", false);
+        addSubCommand(new SubCommand(
+                "list",
+                new ArrayList<>(),
+                "list all color codes",
+                null,
+                Collections.singletonMap(0, ColorsCommandExecutor::commandList)));
+        addSubCommand(new SubCommand(
+                "test",
+                Collections.singletonList(new HelpArg("test-name", "the name to test", "see /colors list")),
+                "test a color coded name",
+                null,
+                Collections.singletonMap(1, ColorsCommandExecutor::commandTest),
+                true));
     }
 
-    private static void commandColors(CommandSender sender, List<String> args) {
+    private static void commandList(CommandSender sender, List<String> args) {
         Colors.sendTitle(sender, "---- Color Codes ----");
         Colors.sendSubTitle(sender, "Colors:");
         Colors.sendInfo(sender, colorCodeList);
         Colors.sendSubTitle(sender, "Formats:");
         Colors.sendInfo(sender, formatList);
+    }
+
+    private static void commandTest(CommandSender sender, List<String> args) {
+        sender.spigot().sendMessage(new ComponentBuilder()
+                .append(new TextComponent(args.get(0).length() + "->" + Colors.translateAlternateColorCodesLength(args.get(0)) + " characters"))
+                .color(Colors.titleColor.asBungee())
+                .append(new TextComponent(": \""))
+                .color(Colors.darkColor.asBungee())
+                .append(new TextComponent(Colors.translateAlternateColorCodes(args.get(0))))
+                .event(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, args.get(0)))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(Colors.regular + "Click to copy to clipboard")))
+                .append(new TextComponent("\""))
+                .color(Colors.darkColor.asBungee())
+                .event((ClickEvent)null)
+                .event((HoverEvent) null)
+                .create());
     }
 
 }

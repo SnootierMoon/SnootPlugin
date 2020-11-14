@@ -23,7 +23,7 @@ public class NickCommandExecutor extends SnootCommandExecutor {
                 Collections.singletonMap(0, NickCommandExecutor::commandRemove)));
         addSubCommand(new SubCommand(
                 "set",
-                Collections.singletonList(new HelpArg("nickname", "your new nickname", "see /colors")),
+                Collections.singletonList(new HelpArg("nickname", "your new nickname", "see /colors list")),
                 "change your current nickname",
                 null,
                 Collections.singletonMap(1, NickCommandExecutor::commandSet),

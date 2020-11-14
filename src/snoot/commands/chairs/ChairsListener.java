@@ -46,12 +46,13 @@ public class ChairsListener implements Listener {
         if (world == null) {
             return;
         }
-        ArmorStand armorStand = world.spawn(location, ArmorStand.class);
+        ArmorStand armorStand = world.spawn(location.add(0, 256, 0), ArmorStand.class);
         armorStand.addPassenger(event.getPlayer());
         armorStand.setGravity(false);
         armorStand.setSmall(true);
         armorStand.setInvisible(true);
         armorStand.setInvulnerable(true);
+        armorStand.teleport(location);
     }
 
     @EventHandler
@@ -62,7 +63,7 @@ public class ChairsListener implements Listener {
     }
 
     @EventHandler
-    public void onDismount(EntityDismountEvent event) {
+    public void onEntityDismount(EntityDismountEvent event) {
         if (event.getEntity() instanceof Player) {
             new BukkitRunnable() {
                 @Override

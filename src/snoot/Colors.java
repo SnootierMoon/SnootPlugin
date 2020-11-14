@@ -17,7 +17,7 @@ public class Colors {
     public static final String title = titleColor.toString() + titleColorFormat;
 
     public static final ChatColor commandColor = ChatColor.AQUA;
-    public static final String command = commandColor.toString();
+//    public static final String command = commandColor.toString();
 
     public static final ChatColor errorColor = ChatColor.RED;
     public static final String error = errorColor.toString();
@@ -30,9 +30,9 @@ public class Colors {
     public static final String regular = regularColor.toString();
 
     public static final ChatColor darkButtonColor = ChatColor.DARK_GRAY;
-    public static final String darkButton = darkButtonColor.toString();
+//    public static final String darkButton = darkButtonColor.toString();
     public static final ChatColor regularButtonColor = ChatColor.GREEN;
-    public static final String regularButton = regularButtonColor.toString();
+//    public static final String regularButton = regularButtonColor.toString();
 
 
     public static String coloredColor(ChatColor color) { return color + color.name().toLowerCase(); }
@@ -71,20 +71,49 @@ public class Colors {
         return "";
     }
 
-    public static String translateAlternateColorCodes(String colorCodes) {
-        int index = colorCodes.indexOf('&');
-        if (index == -1) {
-            return colorCodes;
+    private static int translateColorCharLength(char character) {
+        ChatColor color = ChatColor.getByChar(character);
+        if (color != null) {
+            return 0;
         }
-        if (index == colorCodes.length() - 1) {
-            return colorCodes.substring(0, colorCodes.length() - 1);
+        switch (character) {
+            case '&':
+            case '_': return 1;
         }
-        return colorCodes.substring(0, index) + translateColorChar(colorCodes.charAt(index + 1)) +
-                translateAlternateColorCodes(colorCodes.substring(index + 2));
+        return 0;
     }
 
-    public static String command(String label, String helpArgs) {
-       return command + "/" +  label + " " + regular + helpArgs;
+
+    public static String translateAlternateColorCodes(String colorCodes) {
+        int index = 0;
+        StringBuilder text = new StringBuilder();
+        while (true) {
+            index = colorCodes.indexOf('&', index);
+            if (index == -1) {
+                return text + colorCodes;
+            }
+            if (index == colorCodes.length() - 1) {
+                return text + colorCodes.substring(0, colorCodes.length() - 1);
+            }
+            text.append(colorCodes, 0, index).append(translateColorChar(colorCodes.charAt(index + 1)));
+            colorCodes = colorCodes.substring(index + 2);
+        }
+    }
+
+    public static int translateAlternateColorCodesLength(String colorCodes) {
+        int index = 0;
+        int length = 0;
+        while (true) {
+            index = colorCodes.indexOf('&', index);
+            if (index == -1) {
+                return length + colorCodes.length();
+            }
+            if (index == colorCodes.length() - 1) {
+                return length + colorCodes.length() - 1;
+            }
+            length += index + translateColorCharLength(colorCodes.charAt(index + 1));
+            colorCodes = colorCodes.substring(index + 2);
+        }
     }
 
 }

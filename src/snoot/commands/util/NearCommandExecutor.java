@@ -44,14 +44,14 @@ public class NearCommandExecutor extends SnootCommandExecutor {
             }
         }
         if (nearbyPlayers.isEmpty()) {
-            Colors.sendError(sender, "There are no other players in your world.");
+            Colors.sendError(sender, "There are no other players within that distance.");
             return;
         }
         Colors.sendInfo(sender, Colors.title + "Nearby players:");
         for (Player nearbyPlayer : nearbyPlayers) {
             sender.spigot().sendMessage(new ComponentBuilder()
                     .append(Main.getChatManager().getNickComponent(nearbyPlayer))
-                    .append(": " + playerLocation.distance(nearbyPlayer.getLocation()) + " blocks")
+                    .append(": " + (int)playerLocation.distance(nearbyPlayer.getLocation()) + " blocks")
                     .color(Colors.darkColor.asBungee())
                     .create());
         }

@@ -162,7 +162,7 @@ public class SnootCommandExecutor implements CommandExecutor {
                     return true;
                 }
                 if (subCommand.perms != null && !sender.hasPermission(subCommand.perms)) {
-                    Colors.sendError(sender, "You do not have permission use do that command.");
+                    Colors.sendError(sender, "You do not have permission use that command.");
                     return true;
                 }
                 if (args.length == 2 && args[1].equals("?")) {

@@ -42,7 +42,7 @@ public class SurvivalCommandExecutor extends SnootCommandExecutor {
     }
 
     private static void commandJoin(CommandSender sender, List<String> args) {
-        List<World> survivalWorlds = Main.survivalManager().getSurvivalWorlds();
+        List<World> survivalWorlds = Main.getSurvivalManager().getWorlds(SurvivalManager.WorldType.SURVIVAL);
         if (survivalWorlds.isEmpty()) {
             Colors.sendError(sender, "Could not find any survival worlds.");
             return;
@@ -57,7 +57,7 @@ public class SurvivalCommandExecutor extends SnootCommandExecutor {
     }
 
     private static void commandLeave(CommandSender sender, List<String> args) {
-        List<World> creativeWorlds = Main.survivalManager().getCreativeWorlds();
+        List<World> creativeWorlds = Main.getSurvivalManager().getWorlds(SurvivalManager.WorldType.CREATIVE);
         if (creativeWorlds.isEmpty()) {
             Colors.sendError(sender, "Could not find any creative worlds.");
             return;
@@ -74,7 +74,7 @@ public class SurvivalCommandExecutor extends SnootCommandExecutor {
     private static void commandList(CommandSender sender, List<String> args) {
         List<BaseComponent> playerNicks = new ArrayList<>();
         for (Player player : Main.getInstance().getServer().getOnlinePlayers()) {
-            if (Main.survivalManager().getSurvivalWorlds().contains(player.getWorld())) {
+            if (Main.getSurvivalManager().getWorlds(SurvivalManager.WorldType.SURVIVAL).contains(player.getWorld())) {
                 Collections.addAll(playerNicks, Main.getChatManager().getNickComponent(player));
             }
         }

@@ -21,7 +21,7 @@ public class TagsCommandExecutor extends SnootCommandExecutor {
         addSubCommand(new SubCommand(
                 "create",
                 Arrays.asList(new HelpArg("tag-id", "the ID of the new tag", "anything"),
-                        new HelpArg("display-name", "what the new tag will look like", "see /colors", false)),
+                        new HelpArg("display-name", "what the new tag will look like", "see /colors list", false)),
                 "add a tag to the tag list with the display format",
                 "snoot.chat.tags.modify",
                 new HashMap<Integer, BiConsumer<CommandSender, List<String>>>() {{
@@ -46,7 +46,7 @@ public class TagsCommandExecutor extends SnootCommandExecutor {
         addSubCommand(new SubCommand(
                 "modify",
                 Arrays.asList(new HelpArg("tag-id", "the ID of the tag to modify", "an ID from /tag list"),
-                        new HelpArg("display-name", "what the tag will look like", "see /colors")),
+                        new HelpArg("display-name", "what the tag will look like", "see /colors list")),
                 "change the display name of a tag",
                 "snoot.chat.tags.modify",
                 Collections.singletonMap(2, TagsCommandExecutor::commandModify)));
