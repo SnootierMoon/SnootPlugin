@@ -2,7 +2,7 @@
 #+OPTIONS: author:nil date:nil num:nil toc:nil
 #+TITLE: SnootPlugin
 
-This is my first project with Bukkit. This is also my first project with Java.
+This is my first (and probably last) project with Bukkit/Spigot. This is also my first project with Java.
 
 This plugin was designed for servers with survival worlds (such as the overworld, nether and end) and creative worlds. However, it can be used for any survival server by denying the permissions for the creative world commands.
 
@@ -42,10 +42,10 @@ To get information on a command, type the command with a question mark as the on
 
 *** Todo (in order)
 
-- inventory GUI =/menu=
-- bannermaker =/bannermaker=
-- trails =/trails=
-- colored signs
-- default command overrides: =/time=, =/teleport=
-- disguises
-- pets
+ - inventory GUI =/menu=
+ - bannermaker =/bannermaker=
+ - trails =/trails=
+ - colored signs
+ - default command overrides: =/time=, =/teleport=
+ - disguises
+ - pets
