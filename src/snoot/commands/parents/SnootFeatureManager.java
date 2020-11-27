@@ -41,6 +41,7 @@ public class SnootFeatureManager {
     }
 
     public void writeFile() {
+        Main.getInstance().getLogger().info(Boolean.toString(fileLoaded));
         if (!fileLoaded) {
             return;
         }
@@ -53,6 +54,10 @@ public class SnootFeatureManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void close() {
+        writeFile();
     }
 
 }

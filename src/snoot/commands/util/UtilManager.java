@@ -7,7 +7,6 @@ public class UtilManager extends SnootFeatureManager {
 
     public UtilManager() {
         Main.addCommand("colors", new ColorsCommandExecutor(), new ColorsTabCompleter());
-        Main.addCommand("config", new ConfigCommandExecutor(), new ConfigTabCompleter());
         Main.addCommand("near", new NearCommandExecutor(), new NearTabCompleter());
         Main.addListener(new RenameListener());
     }

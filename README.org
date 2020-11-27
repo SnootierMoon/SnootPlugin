@@ -4,21 +4,11 @@
 
 This is my first (and probably last) project with Bukkit/Spigot. This is also my first project with Java.
 
-This plugin was designed for servers with survival worlds (such as the overworld, nether and end) and creative worlds. However, it can be used for any survival server by denying the permissions for the creative world commands.
+This plugin was designed for SMPs, servers with survival worlds (such as the overworld, nether and end).
 
 ** Installation
 
-*** For survival (SMPs):
-
  - Slap the jar into your =/plugins/= and you're set.
- - Deny permissions to players for:
-   - =snoot.survival= (allows them to join/leave survival worlds)
-
-*** For survival/creative: 
-
- - Slap the jar into your =/plugins/=.
- - Register the creative worlds using =/config world-type [world] creative= on each creative world.
- - Register the survival worlds using =/config world-type [world] survival= on each survival world.
 
 ** Command Usage
 
@@ -35,7 +25,6 @@ To get information on a command, type the command with a question mark as the on
  - nicknames =/nick=
  - tags =/tags=
  - utility:
-   - commands for managing survival/creative worlds: =/survival leave=, =/survival join=, =/survival list=
    - nearby players command: =/near=
    - list and test color codes: =/colors=
    - =./= to =/=
@@ -43,9 +32,4 @@ To get information on a command, type the command with a question mark as the on
 *** Todo (in order)
 
  - inventory GUI =/menu=
- - bannermaker =/bannermaker=
- - trails =/trails=
  - colored signs
- - default command overrides: =/time=, =/teleport=
- - disguises
- - pets

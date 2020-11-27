@@ -16,21 +16,12 @@ commands:
     aliases: colours
     description: /colors ? for more info
     permission: snoot.colors
-  config:
-    description: /config ? for more info
-    permission: snoot.config
   near:
     description: /near ? for more info
     permission: snoot.near
   nick:
     description: /nick ? for more info
     permission: snoot.chat.nick
-  rename:
-    description: /rename ? for more info
-    permission: snoot.rename
-  survival:
-    description: /survival ? for more info
-    permission: snoot.survival
   tags:
     description: /tags ? for more info
     permission: snoot.chat.tags
@@ -43,14 +34,7 @@ permissions:
       snoot.colors: true
       snoot.chat: true
       snoot.near: true
-      snoot.rename: true
       snoot.survival: true
-
-  snoot.admin:
-    default: true
-    children:
-      snoot: true
-      snoot.config: true
 
   snoot.chairs:
     default: true
@@ -59,10 +43,6 @@ permissions:
   snoot.colors:
     default: true
     description: allows you to use /colors
-
-  snoot.config:
-    default: false
-    description: allows you to modify the behavior of SnootPlugin
 
   snoot.chat:
     default: true
@@ -91,11 +71,3 @@ permissions:
   snoot.near:
     default: true
     description: allows you to use /near
-
-  snoot.rename:
-    default: true
-    description: allows you to use /rename
-
-  snoot.survival:
-    default: true
-    description: allows you to use /survival
