@@ -22,6 +22,12 @@ commands:
   nick:
     description: /nick ? for more info
     permission: snoot.chat.nick
+  nv:
+    description: /nv ? for more info
+    permission: snoot.creative.nv
+  speed:
+    description: /speed ? for more info
+    permission: snoot.creative.speed
   tags:
     description: /tags ? for more info
     permission: snoot.chat.tags
@@ -31,18 +37,15 @@ permissions:
     default: true
     children:
       snoot.chairs: true
-      snoot.colors: true
       snoot.chat: true
+      snoot.colors: true
+      snoot.creative: true
       snoot.near: true
       snoot.survival: true
 
   snoot.chairs:
     default: true
     description: allows you to use /chairs
-
-  snoot.colors:
-    default: true
-    description: allows you to use /colors
 
   snoot.chat:
     default: true
@@ -67,6 +70,22 @@ permissions:
   snoot.chat.tags.use:
     default: true
     description: allows you to equip tags with /tags
+
+  snoot.colors:
+    default: true
+    description: allows you to use /colors
+
+  snoot.creative:
+    default: true
+    children:
+      snoot.creative.nv: true
+      snoot.creative.speed: true
+  snoot.creative.nv:
+    default: true
+    description: allows you to set night vision with /nv
+  snoot.creative.speed:
+    default: true
+    description: allows you to set your speed with /speed
 
   snoot.near:
     default: true

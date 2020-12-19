@@ -50,7 +50,7 @@ public class ColorsCommandExecutor extends SnootCommandExecutor {
 
     private static void commandTest(CommandSender sender, List<String> args) {
         sender.spigot().sendMessage(new ComponentBuilder()
-                .append(new TextComponent(args.get(0).length() + "->" + Colors.translateAlternateColorCodesLength(args.get(0)) + " characters"))
+                .append(new TextComponent(args.get(0).length() + " -> " + Colors.translateAlternateColorCodesLength(args.get(0)) + " characters"))
                 .color(Colors.titleColor.asBungee())
                 .append(new TextComponent(": \""))
                 .color(Colors.darkColor.asBungee())

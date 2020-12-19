@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class NearCommandExecutor extends SnootCommandExecutor {
 
     public NearCommandExecutor() {
-        super(Collections.singletonList(new HelpArg("max-distance", "the radius within which players should be listed", "number", false)), "show nearby players", "snoot.near", new HashMap<Integer, BiConsumer<CommandSender, List<String>>>() {{
+        super(Collections.singletonList(new HelpArg("radius", "the maximum distance to list players", "number", false)), "show nearby players", "snoot.near", new HashMap<Integer, BiConsumer<CommandSender, List<String>>>() {{
             put(0,  NearCommandExecutor::commandNear);
             put(1,  NearCommandExecutor::commandNear2);
         }}, true);
@@ -29,6 +29,10 @@ public class NearCommandExecutor extends SnootCommandExecutor {
         int distance;
         try {
             distance = Integer.parseInt(args.get(0));
+            if (distance <= 0) {
+                Colors.sendError(sender, "Choose a distance greater than zero.");
+                return;
+            }
         } catch (NumberFormatException e) {
             Colors.sendError(sender, "Invalid player distance.");
             return;

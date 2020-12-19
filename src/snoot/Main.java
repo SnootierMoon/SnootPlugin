@@ -2,6 +2,7 @@ package snoot;
 
 import org.bukkit.WorldCreator;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import snoot.commands.chairs.ChairsManager;
@@ -25,6 +26,9 @@ public final class Main extends JavaPlugin {
         managers.add(new ChatManager());
         managers.add(new ChairsManager());
         managers.add(new UtilManager());
+        for (Player player : getServer().getOnlinePlayers()) {
+            player.setPlayerListHeader("COOOOOOOM");
+        }
     }
 
     private void disable() {

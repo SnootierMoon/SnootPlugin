@@ -2,34 +2,4 @@
 #+OPTIONS: author:nil date:nil num:nil toc:nil
 #+TITLE: SnootPlugin
 
-This is my first (and probably last) project with Bukkit/Spigot. This is also my first project with Java.
-
-This plugin was designed for SMPs, servers with survival worlds (such as the overworld, nether and end).
-
-** Installation
-
- - Slap the jar into your =/plugins/= and you're set.
-
-** Command Usage
-
-You can get a list of commands by doing =/help SnootPlugin=.
-
-To get information on a command, type the command with a question mark as the only argument: =/command ?= or =/command subcommand ?=
-
-** Features
-
-*** Current  
-
- - chairs: =/chairs=
- - chatcolor: =/chatcolor=
- - nicknames =/nick=
- - tags =/tags=
- - utility:
-   - nearby players command: =/near=
-   - list and test color codes: =/colors=
-   - =./= to =/=
-
-*** Todo (in order)
-
- - inventory GUI =/menu=
- - colored signs
+This plugin is ded'd. See [[SnootPlugin-v2][https://github.com/SnootierMoon/SnootPlugin-v2]].

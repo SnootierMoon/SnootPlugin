@@ -46,7 +46,7 @@ public class ChairsListener implements Listener {
         if (world == null) {
             return;
         }
-        ArmorStand armorStand = world.spawn(location.add(0, 256, 0), ArmorStand.class);
+        ArmorStand armorStand = world.spawn(location, ArmorStand.class);
         armorStand.addPassenger(event.getPlayer());
         armorStand.setGravity(false);
         armorStand.setSmall(true);
